@@ -22,6 +22,7 @@ app.config['SECRET_KEY'] = 'you-will-never-guess'
 @app.route('/')
 @app.route('/index')
 def index():
+    #user = {'username': 'Garrett'}
     return render_template('index.html', title='Home')
 
 
@@ -29,10 +30,6 @@ def index():
 def query():
     return render_template('query.html', title='Query')
 
-
-@app.route('/<name>')
-def hello_name(name):
-    return "Hello {}!".format(name)
 
 @app.route('/map')
 def createMap():
