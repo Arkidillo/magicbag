@@ -33,6 +33,7 @@ def query():
 
 @app.route('/map')
 def createMap():
+
     map = folium.Map(location=[47.916597, 106.903083],
                         tiles = "Stamen Terrain",
                         zoom_start = 12)
@@ -56,9 +57,19 @@ def forms():
     if form.validate_on_submit():
         lat = request.form['lat']
         long = request.form['long']
+        name = form.name.data
+        income = form.income.data
+        last_visit_date = datetime.datetime.today()
+
         flash('Info submitted for {} with income {} at time {} and {}, {}'.format(form.name.data, form.income.data, datetime.datetime.today().strftime('%Y-%m-%d'), lat, long))
+
+        form = Form(key=1, name=name, income=income, last_visit_date=last_visit_date, lat=lat, lon=long)
+
+        db.session.add(form)
+        db.session.commit()
+
         return redirect('/forms')
     return render_template('forms.html', title='Info Form', form=form)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
