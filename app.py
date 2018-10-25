@@ -4,6 +4,7 @@ from flask import Flask, redirect, url_for, render_template, request, session, f
 from flask_sqlalchemy import SQLAlchemy
 import psycopg2
 import os
+import folium
 
 app = Flask(__name__)
 #app.config.from_object(os.environ['APP_SETTINGS'])
@@ -20,35 +21,36 @@ app.config['SECRET_KEY'] = 'you-will-never-guess'
 
 @app.route('/')
 @app.route('/index')
-
 def index():
-    user = {'username': 'Garrett'}
-    return render_template('index.html', title='Home', user=user)
+    #user = {'username': 'Garrett'}
+    return render_template('index.html', title='Home')
 
-@app.route('/forms')
-def forms():
-    return render_template('forms.html', title='Forms')
 
 @app.route('/query')
 def query():
     return render_template('query.html', title='Query')
 
 
+@app.route('/map')
+def createMap():
+    map = folium.Map(location=[47.916597, 106.903083],
+                        tiles = "Stamen Terrain",
+                        zoom_start = 12)
+    folium.Marker([47.932931, 106.864618], popup='<a href=http://localhost:5000/forms>form</a>').add_to(map)
 
-@app.route('/<name>')
-def hello_name(name):
-    return "Hello {}!".format(name)
+    map.save("./templates/map.html")
+    return render_template('map.html', title='Map')
 
 
-@app.route('/form', methods=['GET', 'POST'])
-def form():
+@app.route('/forms', methods=['GET', 'POST'])
+def forms():
     form = DataCollect()
     if form.validate_on_submit():
         lat = request.form['lat']
         long = request.form['long']
         flash('Info submitted for {} with income {} at time {} and {}, {}'.format(form.name.data, form.income.data, datetime.datetime.today().strftime('%Y-%m-%d'), lat, long))
-        return redirect('/form')
-    return render_template('form.html', title='Info Form', form=form)
+        return redirect('/forms')
+    return render_template('forms.html', title='Info Form', form=form)
 
 if __name__ == '__main__':
     app.run()
