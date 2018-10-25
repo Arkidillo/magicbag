@@ -36,7 +36,15 @@ def createMap():
     map = folium.Map(location=[47.916597, 106.903083],
                         tiles = "Stamen Terrain",
                         zoom_start = 12)
-    folium.Marker([47.932931, 106.864618], popup='<a href=http://localhost:5000/forms>form</a>').add_to(map)
+
+    #directions from headquarters(maybe)
+    # https://www.google.com/maps/dir/?api=1&origin=<latitude>,<longitude>&destination=<latitude>,<longitude>
+    # https://www.google.com/maps/dir/?api=1&origin=47.917723, 106.923855&destination=47.932931,106.864618
+
+    # directions from cur location:
+    # https://www.google.com/maps/dir/?api=1&destination=<latitude>,<longitude>
+    # https://www.google.com/maps/dir/?api=1&destination=47.932931,106.864618
+    folium.Marker([47.932931, 106.864618], popup='<a href=https://www.google.com/maps/dir/?api=1&origin=47.917723,106.923855&destination=47.932931,106.864618 target="_blank">Navigate here</a>').add_to(map)
 
     map.save("./templates/map.html")
     return render_template('map.html', title='Map')
