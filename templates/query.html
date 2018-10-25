@@ -2,8 +2,25 @@
 
 {% block content %}
 <html>
-	<h1><a href="/">Home</a></h1>
-	<p style="font-size:20px">{{ table }}</p>
-	<p>test</p>
+<body>
+	<h1>Query</h1>
+
+	<form action="/query" method="post" novalidate>
+		{{ form.hidden_tag() }}
+		<p>
+			{{ form.name.label }}<br>
+			{{ form.name(size=32) }}
+		</p>
+		<p>
+			{{ form.income.label }}<br>
+			{{ form.income(size=32) }}
+		</p>
+		<p>
+			{{ form.last_visit_date.label }}<br>
+			{{ form.last_visit_date(size=32) }}
+		</p>
+		<p>{{ form.submit() }}</p>
+	</form>
+</body>
 <html>
 {% endblock %}
