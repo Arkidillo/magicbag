@@ -17,6 +17,7 @@
 	<script>
 		function getLocation() {
 			if (navigator.geolocation) {
+				// console.log("get location");
 				navigator.geolocation.getCurrentPosition(showPosition);
 			}
 			else {
@@ -28,6 +29,11 @@
 		function showPosition(position) {
 			document.getElementById("lat").value = position.coords.latitude;
 			document.getElementById("long").value = position.coords.longitude;
+			// console.log("fill lat and long");
+		}
+
+		function sleep(ms) {
+		  return new Promise(resolve => setTimeout(resolve, ms));
 		}
 	</script>
 
@@ -35,6 +41,7 @@
 		{{ form.hidden_tag() }}
 		<script>
 			getLocation();
+			sleep(3000);
 		</script>
 		<input type="hidden" id="lat" name="lat">
 		<input type="hidden" id="long" name="long">

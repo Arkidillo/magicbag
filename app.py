@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 import psycopg2
 import os
 import folium
+from folium.plugins import MarkerCluster
 
 app = Flask(__name__)
 #app.config.from_object(os.environ['APP_SETTINGS'])
@@ -65,6 +66,7 @@ def createMap():
                         tiles = "Stamen Terrain",
                         zoom_start = 12)
 
+
     #directions from headquarters(maybe)
     # https://www.google.com/maps/dir/?api=1&origin=<latitude>,<longitude>&destination=<latitude>,<longitude>
     # https://www.google.com/maps/dir/?api=1&origin=47.917723, 106.923855&destination=47.932931,106.864618
@@ -72,13 +74,16 @@ def createMap():
     # directions from cur location:
     # https://www.google.com/maps/dir/?api=1&destination=<latitude>,<longitude>
     # https://www.google.com/maps/dir/?api=1&destination=47.932931,106.864618
+    mc = MarkerCluster()
+
     for kid in lst:
         name = kid[5]
         lat = kid[2]
         lon = kid[4]
         url = '<a href=https://www.google.com/maps/dir/?api=1&destination={},{} target="_blank">{}</a>'.format(lat, lon, name)
-        folium.Marker([lat, lon], popup=url).add_to(map)
+        mc.add_child(folium.Marker([lat, lon], popup=url))
 
+    map.add_child(mc)
     map.save("./templates/map.html")
     return render_template('map.html', title='Map')
 
