@@ -13,13 +13,12 @@ db = SQLAlchemy(app)
 
 #from models import Result
 
-
 @app.route('/')
 @app.route('/index')
 
 def index():
-    user = {'username': 'Garrett'}
-    return render_template('index.html', title='Home', user=user)
+    #user = {'username': 'Garrett'}
+    return render_template('index.html', title='Home')
 
 @app.route('/forms')
 def forms():
@@ -28,13 +27,6 @@ def forms():
 @app.route('/query')
 def query():
     return render_template('query.html', title='Query')
-
-
-
-@app.route('/<name>')
-def hello_name(name):
-    return "Hello {}!".format(name)
-
 
 if __name__ == '__main__':
     app.run()
