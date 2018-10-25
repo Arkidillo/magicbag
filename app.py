@@ -12,6 +12,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 #app.config['SQLALCHEMY_DATABASE_URI'] = "postgres:///magicbag-form"
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://zpxaecnydqxxhj:258722efa1e462c8c825f0e63f575b8d1c0c9e8535fdfda058b6b28ba05e01bf@ec2-107-20-211-10.compute-1.amazonaws.com:5432/d1p1mua37cs8ho"
+database = psycopg2.connect(app.config['SQLALCHEMY_DATABASE_URI'], sslmode='allow')
 db = SQLAlchemy(app)
 
 from models import *
@@ -34,6 +35,11 @@ def query():
 @app.route('/map')
 def createMap():
 
+    cur = database.cursor()
+    query = "SELECT * from form"
+    cur.execute(query)
+    lst = cur.fetchall()
+
     map = folium.Map(location=[47.916597, 106.903083],
                         tiles = "Stamen Terrain",
                         zoom_start = 12)
@@ -45,7 +51,14 @@ def createMap():
     # directions from cur location:
     # https://www.google.com/maps/dir/?api=1&destination=<latitude>,<longitude>
     # https://www.google.com/maps/dir/?api=1&destination=47.932931,106.864618
-    folium.Marker([47.932931, 106.864618], popup='<a href=https://www.google.com/maps/dir/?api=1&origin=47.917723,106.923855&destination=47.932931,106.864618 target="_blank">Navigate here</a>').add_to(map)
+    for kid in lst:
+        print(kid)
+        name = kid[5]
+        lat = kid[2]
+        lon = kid[4]
+        url = '<a href=https://www.google.com/maps/dir/?api=1&origin=47.917723,106.923855&destination={},{} target="_blank">{}</a>'.format(lat, lon, name)
+        print(url)
+        folium.Marker([lat, lon], popup=url).add_to(map)
 
     map.save("./templates/map.html")
     return render_template('map.html', title='Map')
