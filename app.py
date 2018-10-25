@@ -42,8 +42,7 @@ def query():
         elif income is not None:
             query += "WHERE income <= {}".format(income)
         elif last_visit_date is not None:
-            lst = Form.query.filter_by(last_visit_date <= last_visit_date).all()
-            print(lst)
+            query += "WHERE last_visit_date <= '{}'".format(last_visit_date)
 
         session['map_query'] = query
         cur.execute(query)
