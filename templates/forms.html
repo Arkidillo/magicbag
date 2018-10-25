@@ -15,15 +15,27 @@
 	<h1>Info Form</h1>
 
 	<script>
-		navigator.geolocation.getCurrentPosition(showPosition);
+		function getLocation() {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(showPosition);
+			}
+			else {
+				alert("can't access location");
+			}
+		}
+
+		// navigator.geolocation.getCurrentPosition(showPosition);
 		function showPosition(position) {
-			document.getElementById("lat").value = position.coords.latitude
-			document.getElementById("long").value = position.coords.longitude
+			document.getElementById("lat").value = position.coords.latitude;
+			document.getElementById("long").value = position.coords.longitude;
 		}
 	</script>
 
 	<form action="" method="post" novalidate>
 		{{ form.hidden_tag() }}
+		<script>
+			getLocation();
+		</script>
 		<input type="hidden" id="lat" name="lat">
 		<input type="hidden" id="long" name="long">
 		<p>
