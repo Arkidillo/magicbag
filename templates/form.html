@@ -1,0 +1,37 @@
+<html>
+    <body>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        <h1>Info Form</h1>
+
+        <script>
+            navigator.geolocation.getCurrentPosition(showPosition);
+            function showPosition(position) {
+                document.getElementById("lat").value = position.coords.latitude
+                document.getElementById("long").value = position.coords.longitude
+            }
+        </script>
+
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <input type="hidden" id="lat" name="lat">
+            <input type="hidden" id="long" name="long">
+            <p>
+                {{ form.name.label }}<br>
+                {{ form.name(size=32) }}
+            </p>
+            <p>
+                {{ form.income.label }}<br>
+                {{ form.income(size=32) }}
+            </p>
+            <p>{{ form.submit() }}</p>
+        </form>
+    </body>
+</html>
