@@ -22,7 +22,7 @@ app.config['SECRET_KEY'] = 'you-will-never-guess'
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html', title='Home', user=user)
+    return render_template('index.html', title='Home')
 
 
 @app.route('/query')
