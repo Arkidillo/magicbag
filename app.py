@@ -35,10 +35,6 @@ def query():
         income = form.income.data
         last_visit_date = form.last_visit_date.data
 
-        print(name)
-        print(income)
-        print(last_visit_date)
-
         cur = database.cursor()
         query = "SELECT * from form "
         if name is not '':
@@ -77,12 +73,10 @@ def createMap():
     # https://www.google.com/maps/dir/?api=1&destination=<latitude>,<longitude>
     # https://www.google.com/maps/dir/?api=1&destination=47.932931,106.864618
     for kid in lst:
-        print(kid)
         name = kid[5]
         lat = kid[2]
         lon = kid[4]
         url = '<a href=https://www.google.com/maps/dir/?api=1&destination={},{} target="_blank">{}</a>'.format(lat, lon, name)
-        print(url)
         folium.Marker([lat, lon], popup=url).add_to(map)
 
     map.save("./templates/map.html")

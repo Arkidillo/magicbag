@@ -3,7 +3,7 @@ from wtforms import StringField, IntegerField, SubmitField, HiddenField, DateFie
 from wtforms.validators import DataRequired
 
 class DataCollect(FlaskForm):
-    name = StringField('Username', validators=[DataRequired()])
+    name = StringField('Name', validators=[DataRequired()])
     income = IntegerField('Income')
     submit = SubmitField('Submit')
 
