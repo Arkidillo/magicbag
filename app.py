@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 import psycopg2
 import os
 
-
 app = Flask(__name__)
 #app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
@@ -16,8 +15,20 @@ from models import Result
 
 
 @app.route('/')
-def hello():
-    return "Hello World!"
+@app.route('/index')
+
+def index():
+    user = {'username': 'Garrett'}
+    return render_template('index.html', title='Home', user=user)
+
+@app.route('/forms')
+def forms():
+    return render_template('forms.html', title='Forms')
+
+@app.route('/query')
+def query():
+    return render_template('query.html', title='Query')
+
 
 
 @app.route('/<name>')
