@@ -33,15 +33,12 @@ def query():
     form = QueryForm()
     if request.method == 'POST':
         name = form.name.data
-        income = form.income.data
         last_visit_date = form.last_visit_date.data
 
         cur = database.cursor()
         query = "SELECT * from form "
         if name is not '':
             query += "WHERE name = '{}'".format(name)
-        elif income is not None:
-            query += "WHERE income <= {}".format(income)
         elif last_visit_date is not None:
             query += "WHERE last_visit_date <= '{}'".format(last_visit_date)
 
