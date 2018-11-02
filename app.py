@@ -42,6 +42,8 @@ def query():
         elif last_visit_date is not None:
             query += "WHERE last_visit_date <= '{}'".format(last_visit_date)
 
+        query += "ORDER BY last_visit_date DESC"
+
         session['map_query'] = query
         cur.execute(query)
         lst = cur.fetchall()
