@@ -58,9 +58,9 @@ def createMap():
     cur.execute(query)
     lst = cur.fetchall()
 
-    map = folium.Map(location=[47.916597, 106.903083],
+    map = folium.Map(location=[38.899926, -77.049388],
                         tiles = "Stamen Terrain",
-                        zoom_start = 12)
+                        zoom_start = 16)
 
 
     #directions from headquarters(maybe)
