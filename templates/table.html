@@ -2,28 +2,67 @@
 
 {% block content %}
 <html>
+<head>
+<!--
+<style>
+
+table {
+    font-family: arial, sans-serif;
+    color: #000000;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #000000;
+    color: "black";
+    text-align: left;
+    padding: 8px;
+}
+
+tr {
+    background-color: #dddddd;
+}
+</style>
+-->
+</head>
 <body>
-	<h1>Table</h1>
-  <table>
-  {% for item in data %}
-  <tr>
-      <td>{{item[4]}}</td>
-      <td>{{item[0]}}</td>
-      <td>{{item[5]}}</td>
-      <td>{{item[5]}}</td>
-      <td>{{item[6]}}</td>
-      <td>{{item[7]}}</td>
-      <td>{{item[8]}}</td>
-      <td>{{item[14]}}</td>
-      <td>{{item[9]}}</td>
-      <td>{{item[10]}}</td>
-      <td>{{item[11]}}</td>
-      <td>{{item[12]}}</td>
-      <td>{{item[13]}}</td>
-  </tr>
-  {% endfor %}
-</table>
-<a href="/map">Map</a>
+		<h1>Table</h1>
+	<div style="overflow-x:auto;">
+	  <table>
+	  <tr>
+		  <th>School Length</th>
+		  <th>School Name</th>
+		  <th>People in House</th>
+		  <th>Test Column</th>
+		  <th>Test Column</th>
+		  <th>Test Column</th>
+		  <th>Test Column</th>
+		  <th>Test Column</th>
+		  <th>Test Column</th>
+		  <th>Test Column</th>
+		  <th>Test Column</th>
+		  <th>Test Column</th>
+	  </tr>
+	  {% for item in data %}
+	  <tr>
+	      <td>{{item[4]}}</td>
+	      <td>{{item[0]}}</td>
+	      <td>{{item[5]}}</td>
+	      <td>{{item[6]}}</td>
+	      <td>{{item[7]}}</td>
+	      <td>{{item[8]}}</td>
+	      <td>{{item[14]}}</td>
+	      <td>{{item[9]}}</td>
+	      <td>{{item[10]}}</td>
+	      <td>{{item[11]}}</td>
+	      <td>{{item[12]}}</td>
+	      <td>{{item[13]}}</td>
+	  </tr>
+	  {% endfor %}
+	</table>
+       </div>
+<a style="font-size:25px;" href="/map">Map</a>
 </body>
 <html>
 {% endblock %}
