@@ -73,9 +73,9 @@ def createMap():
     mc = MarkerCluster()
 
     for kid in lst:
-        name = kid[5]
-        lat = kid[2]
-        lon = kid[4]
+        name = kid[4]
+        lat = kid[1]
+        lon = kid[3]
         url = '<a href=https://www.google.com/maps/dir/?api=1&destination={},{} target="_blank">{}</a>'.format(lat, lon, name)
         mc.add_child(folium.Marker([lat, lon], popup=url))
 
