@@ -93,12 +93,19 @@ def forms():
         lat = request.form['lat']
         long = request.form['long']
         name = form.name.data
-        income = form.income.data
+        school_length = form.school_length.data
+        school_name = form.school_name.data
+        people_in_house = form.people_in_house.data
+        why_not_in_school = form.why_not_in_school.data
+        dreams = form.dreams.data
+        most_loved = form.most_loved.data
+        potential_abuser = form.potential_abuser.data
+        what_abuse = form.what_abuse.data
+        phone = form.phone.data
+        address = form.address.data
         last_visit_date = datetime.datetime.today()
 
-        flash('Info submitted for {} with income {} at time {} and {}, {}'.format(form.name.data, form.income.data, datetime.datetime.today().strftime('%Y-%m-%d'), lat, long))
-
-        form = Form(key=1, name=name, income=income, last_visit_date=last_visit_date, lat=lat, lon=long)
+        form = Form(key=1, name=name, last_visit_date=last_visit_date, lat=lat, lon=long, school_length=school_length, school_name=school_name, people_in_house=people_in_house, why_not_in_school=why_not_in_school, dreams=dreams, most_loved=most_loved, potential_abuser=potential_abuser, what_abuse=what_abuse, phone=phone, address=address)
 
         db.session.add(form)
         db.session.commit()
